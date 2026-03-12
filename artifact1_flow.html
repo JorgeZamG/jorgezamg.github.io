@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Intelligence Pipeline — Jorge Zamora</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --card: #111827;
+    --border: #1e2d45;
+    --accent: #00d4aa;
+    --accent2: #3b82f6;
+    --accent3: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 48px 32px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-left h1 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  .header-left h2 {
+    font-family: var(--sans);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .header-left h2 span { color: var(--accent); }
+
+  .header-right {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* Impact bar */
+  .impact-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .impact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .impact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .impact-card:nth-child(2)::before { background: var(--accent2); }
+  .impact-card:nth-child(3)::before { background: var(--accent3); }
+
+  .impact-number {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .impact-card:nth-child(2) .impact-number { color: var(--accent2); }
+  .impact-card:nth-child(3) .impact-number { color: var(--accent3); }
+
+  .impact-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Flow diagram */
+  .flow-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .flow-row.sources {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 0;
+  }
+
+  .source-node {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .source-node:hover { border-color: var(--accent2); }
+
+  .node-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background: #1e2d45;
+  }
+
+  .node-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .node-sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Connector */
+  .connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .connector-line {
+    width: 2px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--border), var(--accent));
+    position: relative;
+  }
+
+  .connector-line::after {
+    content: '▼';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  .connector-label {
+    position: absolute;
+    right: calc(50% + 16px);
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  /* Process nodes */
+  .process-node {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-node.n8n { border-color: #e85d04; }
+  .process-node.gpt { border-color: #10a37f; }
+  .process-node.output { border-color: var(--accent); }
+
+  .process-node::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .process-node.n8n::before { background: #e85d04; }
+  .process-node.gpt::before { background: #10a37f; }
+  .process-node.output::before { background: var(--accent); }
+
+  .process-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    background: #1e2d45;
+  }
+
+  .process-content { flex: 1; }
+
+  .process-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .process-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .process-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .tag.orange { background: rgba(232, 93, 4, 0.15); color: #e85d04; }
+  .tag.green { background: rgba(16, 163, 127, 0.15); color: #10a37f; }
+  .tag.blue { background: rgba(59, 130, 246, 0.15); color: var(--accent2); }
+  .tag.teal { background: rgba(0, 212, 170, 0.15); color: var(--accent); }
+
+  .process-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Output split */
+  .output-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .output-node {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .output-node.telegram { border-color: #2aabee; }
+  .output-node.email { border-color: var(--accent3); }
+
+  .output-icon {
+    font-size: 24px;
+  }
+
+  .output-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .output-desc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* Sample output */
+  .sample-section {
+    margin-top: 48px;
+  }
+
+  .sample-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .sample-message {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+  }
+
+  .sample-message::before {
+    content: '// SAMPLE OUTPUT — Telegram digest (auto-generated, 06:00 UTC)';
+    display: block;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-size: 10px;
+  }
+
+  .sample-message .highlight { color: var(--accent); }
+  .sample-message .highlight2 { color: var(--accent3); }
+  .sample-message .highlight3 { color: #f87171; }
+  .sample-message .dim { color: var(--muted); }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .flow-row { animation: fadeUp 0.4s ease both; }
+  .flow-row:nth-child(1) { animation-delay: 0.1s; }
+  .flow-row:nth-child(2) { animation-delay: 0.15s; }
+  .flow-row:nth-child(3) { animation-delay: 0.2s; }
+  .flow-row:nth-child(4) { animation-delay: 0.25s; }
+  .flow-row:nth-child(5) { animation-delay: 0.3s; }
+  .flow-row:nth-child(6) { animation-delay: 0.35s; }
+  .flow-row:nth-child(7) { animation-delay: 0.4s; }
+
+  .impact-card { animation: fadeUp 0.4s ease both; }
+  .impact-card:nth-child(1) { animation-delay: 0.05s; }
+  .impact-card:nth-child(2) { animation-delay: 0.1s; }
+  .impact-card:nth-child(3) { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>AI Artifact — Portfolio Submission</h1>
+      <h2>Crypto Intelligence<br><span>Digest Pipeline</span></h2>
+    </div>
+    <div class="header-right">
+      Jorge Zamora<br>
+      jorgeandres.zamorag@gmail.com<br>
+      Artifact 01 / 03<br>
+      Stack: n8n · CoinGecko API · Solscan API · Whale Tracking · Claude API
+    </div>
+  </div>
+
+  <div class="impact-bar">
+    <div class="impact-card">
+      <span class="impact-number">~2h</span>
+      <div class="impact-label">Manual research time eliminated per day across group</div>
+    </div>
+    <div class="impact-card">
+      <span class="impact-number">5</span>
+      <div class="impact-label">Users receiving structured daily intelligence digest</div>
+    </div>
+    <div class="impact-card">
+      <span class="impact-number">100%</span>
+      <div class="impact-label">Automated — zero manual triggers, runs twice daily at 06:30 AM and 06:30 PM UTC</div>
+    </div>
+  </div>
+
+  <div class="flow-title">Pipeline Architecture</div>
+
+  <div class="flow">
+
+    <!-- Sources -->
+    <div class="flow-row sources">
+      <div class="source-node">
+        <div class="node-icon">🦎</div>
+        <div class="node-title">CoinGecko API</div>
+        <div class="node-sub">Price · Volume · Market Cap</div>
+      </div>
+      <div class="source-node">
+        <div class="node-icon">🔍</div>
+        <div class="node-title">Solscan API</div>
+        <div class="node-sub">Solana Txns · On-chain Data</div>
+      </div>
+      <div class="source-node">
+        <div class="node-icon">🐋</div>
+        <div class="node-title">Additional Sources</div>
+        <div class="node-sub">Solana Whale Wallets · Large Txns</div>
+      </div>
+    </div>
+
+    <!-- Connector 1 -->
+    <div class="flow-row connector">
+      <div class="connector-line"></div>
+      <div class="connector-label">API calls · scheduled trigger</div>
+    </div>
+
+    <!-- n8n -->
+    <div class="flow-row">
+      <div class="process-node n8n">
+        <div class="process-icon">🔀</div>
+        <div class="process-content">
+          <div class="process-name">n8n Orchestration Layer</div>
+          <div class="process-desc">Scheduled workflow fires twice daily at 06:30 AM and 06:30 PM UTC. Calls CoinGecko, Solscan, and Solana whale wallet endpoints, normalizes JSON responses, filters for relevant tokens and protocols, and routes structured data payload to Claude API processing node.</div>
+          <div class="process-tags">
+            <span class="tag orange">n8n</span>
+            <span class="tag orange">Cron trigger</span>
+            <span class="tag orange">HTTP nodes</span>
+            <span class="tag orange">JSON transform</span>
+          </div>
+        </div>
+        <div class="process-badge">Step 01<br>Orchestrate</div>
+      </div>
+    </div>
+
+    <!-- Connector 2 -->
+    <div class="flow-row connector">
+      <div class="connector-line"></div>
+      <div class="connector-label">structured JSON payload</div>
+    </div>
+
+    <!-- Claude API -->
+    <div class="flow-row">
+      <div class="process-node gpt">
+        <div class="process-icon">🧠</div>
+        <div class="process-content">
+          <div class="process-name">Claude API Summarization & Interpretation</div>
+          <div class="process-desc">Structured prompt instructs Claude to analyze incoming market data and narrative signals, identify key movements and anomalies, generate a concise intelligence digest with signal/noise filtering, and flag high-conviction observations.</div>
+          <div class="process-tags">
+            <span class="tag green">Claude API</span>
+            <span class="tag green">Prompt engineering</span>
+            <span class="tag green">Structured output</span>
+            <span class="tag green">Signal filtering</span>
+          </div>
+        </div>
+        <div class="process-badge">Step 02<br>Interpret</div>
+      </div>
+    </div>
+
+    <!-- Connector 3 -->
+    <div class="flow-row connector">
+      <div class="connector-line"></div>
+      <div class="connector-label">formatted digest</div>
+    </div>
+
+    <!-- Output -->
+    <div class="flow-row output-split">
+      <div class="output-node telegram">
+        <div class="output-icon">✈️</div>
+        <div>
+          <div class="output-title">Telegram Bot</div>
+          <div class="output-desc">Delivered to 5-person group · 06:30 AM & 06:30 PM UTC</div>
+        </div>
+      </div>
+      <div class="output-node email">
+        <div class="output-icon">📧</div>
+        <div>
+          <div class="output-title">Email Digest</div>
+          <div class="output-desc">Formatted backup delivery · Archived for reference</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sample Output -->
+  <div class="sample-section">
+    <div class="sample-title">Sample Output Format</div>
+    <div class="sample-message">
+      <span class="highlight">📊 DAILY CRYPTO DIGEST — March 11, 2026</span><br><br>
+      <span class="highlight">▸ MACRO SIGNAL</span><br>
+      <span class="dim">BTC</span> holding $84.2k support after 3-day consolidation. ETH underperforming relative to BTC — ratio at 0.031, lowest since Nov '25.<br><br>
+      <span class="highlight">▸ DEFI WATCH</span><br>
+      <span class="dim">Aave TVL</span> +8.2% WoW → $14.1B. Unusual inflow pattern on Arbitrum deployment — worth monitoring for narrative rotation.<br><br>
+      <span class="highlight2">▸ HIGH CONVICTION OBSERVATION</span><br>
+      Solana DEX volume surpassed Ethereum mainnet for 3rd consecutive day. Protocol-level activity suggests organic usage, not wash trading.<br><br>
+      <span class="highlight3">▸ RISK FLAG</span><br>
+      Stablecoin depeg alert: USDT briefly hit $0.9991 on Curve. Resolved within 4min — likely thin liquidity event, not systemic.<br><br>
+      <span class="dim">// Generated by n8n + Claude API pipeline · 0 manual inputs · Next digest: 06:30 AM or 06:30 PM UTC</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">Jorge Zamora · AI Portfolio · 2024–2025</div>
+    <div class="footer-right">Artifact 01 — Flow Diagram & Architecture</div>
+  </div>
+
+</div>
+</body>
+</html>

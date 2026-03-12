@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — AI Factory · Jorge Zamora</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --accent: #0d7377;
+    --accent2: #7c3aed;
+    --accent-light: #e6f4f4;
+    --accent2-light: #f3e8ff;
+    --border: #e5e7eb;
+    --code-bg: #f3f4f6;
+    --serif: 'Lora', serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    padding: 64px 32px;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  h1 em { color: var(--accent); font-style: italic; }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  /* Meta strip */
+  .meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--text); }
+
+  /* Section headers */
+  h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    margin-top: 48px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #374151;
+    margin-bottom: 16px;
+  }
+
+  /* Tool cards */
+  .tool-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .tool-card {
+    border-radius: 10px;
+    padding: 24px;
+    border: 1px solid;
+  }
+
+  .tool-card.cs {
+    background: var(--accent-light);
+    border-color: #a7d9da;
+  }
+
+  .tool-card.copy {
+    background: var(--accent2-light);
+    border-color: #d8b4fe;
+  }
+
+  .tool-emoji { font-size: 28px; margin-bottom: 12px; display: block; }
+
+  .tool-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .tool-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .tool-users {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .tool-card.copy .tool-users { color: var(--accent2); }
+
+  /* Callout */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin: 32px 0;
+    border-radius: 0 6px 6px 0;
+    background: var(--accent-light);
+  }
+  .callout p {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--accent);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Steps */
+  .steps { margin: 24px 0; }
+  .step { display: flex; gap: 20px; margin-bottom: 24px; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-num.purple { background: var(--accent2); }
+  .step-content h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-content p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.6; }
+
+  /* Impact grid */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .impact-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    background: white;
+  }
+
+  .impact-item.green { border-color: #bbf7d0; background: #f0fdf4; }
+  .impact-item.purple { border-color: #d8b4fe; background: #faf5ff; }
+
+  .impact-metric {
+    font-family: var(--mono);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .impact-item.purple .impact-metric { color: var(--accent2); }
+  .impact-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* Stack section */
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .pill {
+    font-family: var(--mono); font-size: 10px;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--muted); background: white;
+  }
+  .pill.teal { background: var(--accent-light); border-color: #a7d9da; color: var(--accent); }
+  .pill.purple { background: var(--accent2-light); border-color: #d8b4fe; color: var(--accent2); }
+
+  /* Divider */
+  .tool-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 32px;
+  }
+  .tool-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .tool-divider-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* Lessons */
+  .lesson {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .lesson:last-child { border-bottom: none; }
+  .lesson-icon { font-size: 18px; margin-top: 2px; }
+  .lesson-text { font-size: 14px; line-height: 1.6; color: #374151; }
+  .lesson-text strong { color: var(--text); }
+
+  /* Footer */
+  .footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .footer-artifact { font-family: var(--mono); font-size: 10px; color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="eyebrow">AI Artifact — Case Study · Artifact 02 / 03</div>
+
+  <h1>Two AI Tools. 50+ Users.<br><em>Both Adopted Daily.</em></h1>
+  <p class="subtitle">How I led the ops, enablement, and adoption of two production AI tools inside a retail company — a customer service knowledge chatbot and a copywriting assistant — that shifted how agents and writers actually worked, every day.</p>
+
+  <div class="meta">
+    <div class="meta-item">
+      <div class="meta-label">My Role</div>
+      <div class="meta-value">Process Design · Prompt Engineering · Adoption Lead</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Team</div>
+      <div class="meta-value">Ops & Enablement Lead (Jorge) + Engineering team</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Stack</div>
+      <div class="meta-value">Claude API · GPT · Gemini · RAG · CRM integration</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Total users</div>
+      <div class="meta-value">50+ agents + copywriting team</div>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <h2>The Challenge</h2>
+  <p>Customer service agents at a retail company were spending significant time searching across disconnected sources — PDFs, internal wikis, SOPs, and live CRM data — to resolve customer issues. The search was slow, inconsistent, and dependent on individual agent knowledge. Meanwhile the content team was bottlenecked producing social copy, with writers spending most of their time drafting first versions rather than thinking strategically.</p>
+  <p>My role spanned process design, prompt engineering, model evaluation, user adoption, and outcome tracking — the full non-engineering layer of both tools. The opportunity was clear: both teams had the domain knowledge to supervise AI outputs. Neither needed AI to replace their judgment — they needed AI to eliminate the low-value work upstream of it.</p>
+
+  <div class="callout">
+    <p>"My job was to design the layer between the AI and the people using it — making sure the tool fit the workflow, the prompts produced reliable output, and adoption actually happened."</p>
+  </div>
+
+  <!-- Two tools -->
+  <div class="tool-cards">
+    <div class="tool-card cs">
+      <span class="tool-emoji">🎧</span>
+      <div class="tool-name">Agent Knowledge Chatbot</div>
+      <div class="tool-desc">RAG-powered assistant giving agents instant access to the full knowledge base — PDFs, wiki, SOPs, and live CRM data — through a single conversational interface.</div>
+      <div class="tool-users">50+ daily active agents</div>
+    </div>
+    <div class="tool-card copy">
+      <span class="tool-emoji">✍️</span>
+      <div class="tool-name">Copywriting AI Assistant</div>
+      <div class="tool-desc">Multi-model content generator producing social copy drafts at scale — writers shifted from drafting to directing, reviewing AI output instead of producing first versions.</div>
+      <div class="tool-users">Copywriting team · Daily use</div>
+    </div>
+  </div>
+
+  <!-- Tool 1 -->
+  <div class="tool-divider">
+    <div class="tool-divider-line"></div>
+    <div class="tool-divider-label">Tool 01 — Customer Service Chatbot</div>
+    <div class="tool-divider-line"></div>
+  </div>
+
+  <h2>How the Knowledge Chatbot Worked</h2>
+  <p>The core problem was retrieval, not intelligence. Agents knew what they were looking for — they just couldn't find it fast enough across fragmented sources. I worked with the engineering team to design and deploy a RAG (Retrieval-Augmented Generation) pipeline that unified all knowledge sources into a single queryable layer, with Claude API handling synthesis and response generation.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Knowledge Unification</h3>
+        <p>Ingested PDFs, internal wiki pages, SOPs, and live CRM data into a vector store. Documents were chunked, embedded, and indexed — creating a single searchable knowledge layer across all sources for the first time.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Conversational Query Interface</h3>
+        <p>Agents queried in natural language — "what's our return policy for damaged items over 90 days?" — instead of navigating separate systems. The chatbot retrieved relevant document chunks and synthesized a precise, sourced answer.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Live CRM Context</h3>
+        <p>Integrated live customer data so agents could query order history, account status, and prior interactions alongside policy documents — giving full context in a single response rather than requiring tab-switching across systems.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Multi-Model Routing</h3>
+        <p>Claude API handled complex synthesis and nuanced policy questions. GPT and Gemini were evaluated and selectively used for specific query types — optimizing for response quality and cost per interaction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-item green">
+      <span class="impact-metric">~50%</span>
+      <div class="impact-desc">Faster resolution time — agents stopped context-switching across systems and got precise answers in seconds instead of minutes.</div>
+    </div>
+    <div class="impact-item green">
+      <span class="impact-metric">50+</span>
+      <div class="impact-desc">Agents using the tool daily as their primary knowledge source — full team adoption, not a pilot.</div>
+    </div>
+    <div class="impact-item green">
+      <span class="impact-metric">↓</span>
+      <div class="impact-desc">Reduced escalations — agents resolved more issues independently, without needing to escalate to supervisors for policy lookups.</div>
+    </div>
+    <div class="impact-item green">
+      <span class="impact-metric">↑</span>
+      <div class="impact-desc">Higher agent satisfaction and more tickets handled — less time searching meant more capacity per agent per shift.</div>
+    </div>
+  </div>
+
+  <!-- Tool 2 -->
+  <div class="tool-divider">
+    <div class="tool-divider-line"></div>
+    <div class="tool-divider-label">Tool 02 — Copywriting AI Assistant</div>
+    <div class="tool-divider-line"></div>
+  </div>
+
+  <h2>How the Copywriting Assistant Worked</h2>
+  <p>The content team's bottleneck wasn't ideas — it was drafting volume. Writers were spending the majority of their time producing first-version social copy, leaving little bandwidth for strategy, creative direction, or quality refinement. The shift we aimed for: writers as editors and directors, not drafters.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background: var(--accent2);">1</div>
+      <div class="step-content">
+        <h3>Brand Voice & Context Ingestion</h3>
+        <p>I designed the prompting architecture — feeding the model brand guidelines, tone documentation, past high-performing posts, and campaign briefs. This gave the AI a working understanding of the brand's voice before generating any output.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background: var(--accent2);">2</div>
+      <div class="step-content">
+        <h3>Multi-Format Draft Generation</h3>
+        <p>I built the prompt framework that structured how writers submitted briefs — the tool then generated multiple copy variants across formats (Instagram caption, tweet, long-form post) simultaneously. Multi-model approach allowed comparison of Claude, GPT, and Gemini outputs for tone and style.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background: var(--accent2);">3</div>
+      <div class="step-content">
+        <h3>Writer Supervision Layer</h3>
+        <p>Copywriters reviewed, selected, and refined AI-generated drafts rather than starting from blank pages. Their role shifted upstream — focusing on brief quality, creative direction, and final judgment rather than volume production.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-item purple">
+      <span class="impact-metric">Faster</span>
+      <div class="impact-desc">Content turnaround improved significantly — more posts shipped per week with the same team headcount.</div>
+    </div>
+    <div class="impact-item purple">
+      <span class="impact-metric">↑ Strategy</span>
+      <div class="impact-desc">Copywriters redirected freed time toward campaign strategy and creative direction — higher-value work that AI couldn't do.</div>
+    </div>
+  </div>
+
+  <!-- Lessons -->
+  <h2>What Made Both Tools Work</h2>
+  <div class="lessons">
+    <div class="lesson">
+      <div class="lesson-icon">🎯</div>
+      <div class="lesson-text"><strong>Adoption depends on fitting the existing workflow.</strong> I mapped both teams' workflows before a single prompt was written — designing the tools to slot into how agents and writers already worked, not asking them to change. That's why both hit daily active usage.</div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-icon">🔀</div>
+      <div class="lesson-text"><strong>Multi-model isn't just about cost — it's about fit.</strong> Claude, GPT, and Gemini each had different strengths. Routing by query type rather than defaulting to one model improved output quality meaningfully.</div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-icon">📐</div>
+      <div class="lesson-text"><strong>The human role matters more when AI handles volume.</strong> Shifting agents and writers from execution to supervision only worked because they had genuine domain expertise. AI amplified their judgment — it didn't replace it.</div>
+    </div>
+    <div class="lesson">
+      <div class="lesson-icon">🔁</div>
+      <div class="lesson-text"><strong>Iteration with real users is the only way to tune.</strong> I ran structured feedback loops with both teams after launch — tracking usage patterns, surfacing friction points, and feeding changes back into prompt design and workflow adjustments. Final versions looked very different from first deploys.</div>
+    </div>
+  </div>
+
+  <!-- Stack -->
+  <h2>Stack</h2>
+  <div class="stack">
+    <span class="pill teal">Claude API</span>
+    <span class="pill teal">GPT API</span>
+    <span class="pill teal">Gemini</span>
+    <span class="pill teal">RAG pipeline</span>
+    <span class="pill teal">Vector store</span>
+    <span class="pill teal">CRM integration</span>
+    <span class="pill purple">PDF ingestion</span>
+    <span class="pill purple">Wiki / knowledge base</span>
+    <span class="pill purple">Brand voice prompting</span>
+    <span class="pill purple">Multi-model routing</span>
+    <span class="pill">Prompt engineering</span>
+    <span class="pill">User feedback loops</span>
+  </div>
+
+  <div class="footer">
+    <div class="footer-name">Jorge Zamora · jorgeandres.zamorag@gmail.com</div>
+    <div class="footer-artifact">Artifact 02 — AI Factory Case Study</div>
+  </div>
+
+</div>
+</body>
+</html>

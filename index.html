@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jorge Zamora — AI Ops & Analytics</title>
+<meta name="description" content="Portfolio of Jorge Zamora — AI Operations, Data Strategy, and Automation work.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET & BASE ─────────────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:       #080c14;
+    --surface:  #0e1520;
+    --card:     #111827;
+    --border:   #1a2740;
+    --border2:  #243354;
+    --text:     #e8edf5;
+    --muted:    #5a7399;
+    --dim:      #3a5070;
+    --accent:   #00d4aa;
+    --accent2:  #3b82f6;
+    --accent3:  #f59e0b;
+    --red:      #f43f5e;
+    --display:  'Syne', sans-serif;
+    --mono:     'DM Mono', monospace;
+    --body:     'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ────────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ──────────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(8, 12, 20, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ─────────────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  #hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  /* Glow orb */
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  h1 .accent { color: var(--accent); }
+  h1 .dim-text { color: var(--dim); }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 48px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 500; }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.4s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #080c14;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #00f0c0;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(0,212,170,0.3);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Stats strip */
+  .hero-stats {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+    right: 48px;
+    display: flex;
+    gap: 48px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+
+  .stat { }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-num span { color: var(--accent); }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ── SECTION COMMON ───────────────────────────────────────── */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 64px;
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ────────────────────────────────────────────────── */
+  #about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    color: #8fa8c8;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .about-right { }
+
+  .skills-group { margin-bottom: 32px; }
+
+  .skills-group-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .skills-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+
+  .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-pill.hi { border-color: rgba(0,212,170,0.3); color: var(--accent); background: rgba(0,212,170,0.05); }
+
+  /* ── PORTFOLIO ────────────────────────────────────────────── */
+  #portfolio { background: var(--bg); }
+
+  .artifacts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .artifact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+
+  .artifact-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  .artifact-preview {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .artifact-preview iframe {
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: top left;
+    pointer-events: none;
+    border: none;
+  }
+
+  .artifact-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, var(--card) 100%);
+  }
+
+  .artifact-body { padding: 24px; }
+
+  .artifact-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .artifact-title {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .artifact-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .artifact-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .atag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .atag.teal { background: rgba(0,212,170,0.1); color: var(--accent); }
+  .atag.blue { background: rgba(59,130,246,0.1); color: var(--accent2); }
+  .atag.amber { background: rgba(245,158,11,0.1); color: var(--accent3); }
+  .atag.red { background: rgba(244,63,94,0.1); color: var(--red); }
+
+  .artifact-cta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .artifact-cta::after { content: '→'; }
+
+  /* ── MODAL ────────────────────────────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .modal-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .modal-close {
+    background: none;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { border-color: var(--red); color: var(--red); }
+
+  .modal-body {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .modal-body iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 75vh;
+    border: none;
+  }
+
+  /* ── EXPERIENCE ───────────────────────────────────────────── */
+  #experience { background: var(--surface); border-top: 1px solid var(--border); }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-left { }
+
+  .exp-company {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .exp-right { }
+
+  .exp-role {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .exp-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .exp-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .exp-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 1px solid var(--border2);
+    color: var(--dim);
+  }
+
+  /* ── CONTACT ──────────────────────────────────────────────── */
+  #contact {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-left .section-title { margin-bottom: 24px; }
+
+  .contact-left p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--accent); }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--surface);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .contact-link-text { flex: 1; }
+  .contact-link-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 2px; }
+  .contact-link-value { font-size: 13px; color: var(--text); font-weight: 500; }
+  .contact-link-arrow { color: var(--muted); font-size: 14px; transition: color 0.2s; }
+  .contact-link:hover .contact-link-arrow { color: var(--accent); }
+
+  .contact-right {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 40px;
+  }
+
+  .contact-right-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .availability {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .avail-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,212,170,0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(0,212,170,0); }
+  }
+
+  .avail-text { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  .target-roles { display: flex; flex-direction: column; gap: 10px; }
+
+  .target-role {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .role-name { font-size: 13px; color: var(--text); }
+  .role-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .role-badge.open { background: rgba(0,212,170,0.1); color: var(--accent); }
+  .role-badge.applying { background: rgba(59,130,246,0.1); color: var(--accent2); }
+
+  /* ── FOOTER ───────────────────────────────────────────────── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+  }
+
+  /* ── ANIMATIONS ───────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ───────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero { padding: 100px 24px 80px; }
+    .hero-stats { left: 24px; right: 24px; gap: 24px; flex-wrap: wrap; }
+    .section-inner { padding: 72px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .artifacts-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 12px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Jorge<span>.</span>Zamora</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">AI Ops & Analytics · Available for hire</div>
+    <h1>
+      I build the<br>
+      <span class="accent">systems</span><br>
+      <span class="dim-text">behind decisions.</span>
+    </h1>
+    <p class="hero-desc">
+      <strong>Data-driven ops professional</strong> with 5+ years deploying AI workflows, analytics pipelines, and operational frameworks for fintech and global enterprise teams.
+    </p>
+    <div class="hero-ctas">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="mailto:jorgeandres.zamorag@gmail.com" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">5<span>+</span></span>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">50<span>+</span></span>
+      <div class="stat-label">AI Tool Users Enabled</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <div class="stat-label">Companies · EY, RappiCard, HP</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2<span>×</span></span>
+      <div class="stat-label">Daily Automated Pipelines</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm an ops and analytics professional who sits at the intersection of <strong>AI enablement, data strategy, and business operations</strong>. My work is about building the layer between powerful tools and the people who need to use them.</p>
+        <p>At EY I managed AI project lifecycle — assessing what was worth building before engineering touched it. At a retail company's AI Factory I led the ops and adoption layer for two production tools used by 50+ people daily. In my own time I build automation pipelines that run twice a day without me touching them.</p>
+        <p>I'm energized by <strong>fintech, fast-moving teams, and problems that don't have a clear owner yet.</strong> Currently targeting Strategy & Operations and AI Ops roles at Series B–D companies.</p>
+      </div>
+      <div class="about-right reveal">
+        <div class="skills-group">
+          <div class="skills-group-label">AI & Automation</div>
+          <div class="skills-pills">
+            <span class="skill-pill hi">Claude API</span>
+            <span class="skill-pill hi">n8n</span>
+            <span class="skill-pill hi">GPT API</span>
+            <span class="skill-pill hi">Gemini</span>
+            <span class="skill-pill">RAG Pipelines</span>
+            <span class="skill-pill">Prompt Engineering</span>
+            <span class="skill-pill">Power Automate</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skills-group-label">Data & Analytics</div>
+          <div class="skills-pills">
+            <span class="skill-pill hi">SQL</span>
+            <span class="skill-pill hi">Power BI</span>
+            <span class="skill-pill hi">Snowflake</span>
+            <span class="skill-pill">Databricks</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Looker Studio</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skills-group-label">Operations & Delivery</div>
+          <div class="skills-pills">
+            <span class="skill-pill">Jira</span>
+            <span class="skill-pill">Confluence</span>
+            <span class="skill-pill">Notion</span>
+            <span class="skill-pill">Agile / Scrum</span>
+            <span class="skill-pill">Stakeholder Mgmt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-label">Portfolio</div>
+    <div class="section-title reveal">AI Work Samples</div>
+    <p class="section-sub reveal">Three artifacts showing how I think about AI operations — from automation architecture to team enablement to strategic evaluation.</p>
+
+    <div class="artifacts-grid">
+
+      <!-- Artifact 1 -->
+      <div class="artifact-card reveal" onclick="openModal('modal1')">
+        <div class="artifact-preview">
+          <iframe src="artifact1_flow.html" title="Crypto Intelligence Pipeline" scrolling="no"></iframe>
+          <div class="artifact-preview-overlay"></div>
+        </div>
+        <div class="artifact-body">
+          <div class="artifact-num">Artifact 01 / 03</div>
+          <div class="artifact-title">Crypto Intelligence Pipeline</div>
+          <div class="artifact-desc">Fully automated digest running twice daily — CoinGecko, Solscan & Solana whale tracking → Claude API → Telegram & email. Zero manual inputs.</div>
+          <div class="artifact-tags">
+            <span class="atag teal">n8n</span>
+            <span class="atag teal">Claude API</span>
+            <span class="atag blue">Automation</span>
+            <span class="atag amber">DeFi</span>
+          </div>
+          <div class="artifact-cta">View artifact</div>
+        </div>
+      </div>
+
+      <!-- Artifact 2 -->
+      <div class="artifact-card reveal" onclick="openModal('modal2')" style="animation-delay:0.1s">
+        <div class="artifact-preview">
+          <iframe src="artifact2_aifactory.html" title="AI Factory Case Study" scrolling="no"></iframe>
+          <div class="artifact-preview-overlay"></div>
+        </div>
+        <div class="artifact-body">
+          <div class="artifact-num">Artifact 02 / 03</div>
+          <div class="artifact-title">AI Factory — Two Tools, 50+ Users</div>
+          <div class="artifact-desc">Led ops and adoption of a RAG-powered customer service chatbot and an AI copywriting assistant. Both hit daily active usage in a retail company.</div>
+          <div class="artifact-tags">
+            <span class="atag teal">RAG</span>
+            <span class="atag teal">Multi-model</span>
+            <span class="atag blue">Enablement</span>
+            <span class="atag red">Retail</span>
+          </div>
+          <div class="artifact-cta">View artifact</div>
+        </div>
+      </div>
+
+      <!-- Artifact 3 -->
+      <div class="artifact-card reveal" onclick="openModal('modal3')" style="animation-delay:0.2s">
+        <div class="artifact-preview">
+          <iframe src="artifact3_card.html" title="EY AI Lifecycle Framework" scrolling="no"></iframe>
+          <div class="artifact-preview-overlay"></div>
+        </div>
+        <div class="artifact-body">
+          <div class="artifact-num">Artifact 03 / 03</div>
+          <div class="artifact-title">EY — AI Project Lifecycle Framework</div>
+          <div class="artifact-desc">Cross-functional AI evaluation framework used across Nike and Dr. Pepper engagements — qualifying viability, modeling ROI, and building deployment roadmaps.</div>
+          <div class="artifact-tags">
+            <span class="atag teal">EY</span>
+            <span class="atag blue">AI Strategy</span>
+            <span class="atag amber">GTM</span>
+            <span class="atag blue">Enterprise</span>
+          </div>
+          <div class="artifact-cta">View artifact</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <div class="section-title reveal">Where I've Worked</div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-company">Ernst & Young</div>
+          <div class="exp-period">Oct 2023 – Present</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Data Strategy Consultant — Business Intelligence & AI Portfolio</div>
+          <div class="exp-desc">Led AI project lifecycle management across cross-functional engineering and stakeholder teams. Built dashboards, coordinated GTM rollouts, and embedded delivery discipline across Nike and Dr. Pepper engagements globally.</div>
+          <div class="exp-highlights">
+            <span class="exp-tag">AI Portfolio Mgmt</span>
+            <span class="exp-tag">Power BI</span>
+            <span class="exp-tag">Databricks</span>
+            <span class="exp-tag">SQL</span>
+            <span class="exp-tag">Jira / Confluence</span>
+            <span class="exp-tag">50% faster decisions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-company">RappiCard México</div>
+          <div class="exp-period">Feb 2023 – Sep 2023</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Senior Business Analyst — Credit Risk & Collections Strategy</div>
+          <div class="exp-desc">Built SQL and Python models for repayment funnel analysis. Designed KPI dashboards, segmentation frameworks, and Champion-Challenger strategies that reduced default exposure by 30%.</div>
+          <div class="exp-highlights">
+            <span class="exp-tag">SQL</span>
+            <span class="exp-tag">Python</span>
+            <span class="exp-tag">Power BI</span>
+            <span class="exp-tag">Credit Risk</span>
+            <span class="exp-tag">30% risk reduction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-company">Hewlett Packard</div>
+          <div class="exp-period">Aug 2021 – Feb 2023</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Business Intelligence Analyst — Product & Operations Data</div>
+          <div class="exp-desc">Built the Data Governance framework for SAP S/4HANA migration adopted by multiple global teams. Designed Power BI and Power Automate pipelines that improved data accuracy by 40%.</div>
+          <div class="exp-highlights">
+            <span class="exp-tag">Data Governance</span>
+            <span class="exp-tag">SAP Migration</span>
+            <span class="exp-tag">Power Automate</span>
+            <span class="exp-tag">40% data quality lift</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-label">Contact</div>
+        <div class="section-title">Let's talk.</div>
+        <p>I'm actively exploring roles in Strategy & Operations and AI Ops at fintech-adjacent companies. Open to relocating to Vancouver or NYC.</p>
+        <div class="contact-links">
+          <a href="mailto:jorgeandres.zamorag@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">jorgeandres.zamorag@gmail.com</div>
+            </div>
+            <div class="contact-link-arrow">↗</div>
+          </a>
+          <a href="https://linkedin.com/in/jorge-andres-zamora/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">in</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">jorge-andres-zamora</div>
+            </div>
+            <div class="contact-link-arrow">↗</div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <div class="contact-right-label">Current Status</div>
+        <div class="availability">
+          <div class="avail-dot"></div>
+          <div class="avail-text">Open to opportunities</div>
+        </div>
+        <div class="target-roles">
+          <div class="target-role">
+            <span class="role-name">Product Operations Associate</span>
+            <span class="role-badge applying">Applying · Brex</span>
+          </div>
+          <div class="target-role">
+            <span class="role-name">AI Operations Specialist</span>
+            <span class="role-badge applying">Applying · Ramp</span>
+          </div>
+          <div class="target-role">
+            <span class="role-name">Strategy & Operations</span>
+            <span class="role-badge open">Open</span>
+          </div>
+          <div class="target-role">
+            <span class="role-name">Growth Analytics</span>
+            <span class="role-badge open">Open</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2025 Jorge Zamora · Built with intention.</div>
+  <div class="footer-right">Guadalajara, Mexico · Open to Vancouver & NYC</div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal1" onclick="closeModal(event, 'modal1')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Artifact 01 — Crypto Intelligence Pipeline</div>
+      <button class="modal-close" onclick="closeModalDirect('modal1')">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe src="artifact1_flow.html" title="Artifact 1"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal2" onclick="closeModal(event, 'modal2')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Artifact 02 — AI Factory Case Study</div>
+      <button class="modal-close" onclick="closeModalDirect('modal2')">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe src="artifact2_aifactory.html" title="Artifact 2"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal3" onclick="closeModal(event, 'modal3')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Artifact 03 — EY AI Lifecycle Framework</div>
+      <button class="modal-close" onclick="closeModalDirect('modal3')">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe src="artifact3_card.html" title="Artifact 3"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e, id) {
+    if (e.target === document.getElementById(id)) closeModalDirect(id);
+  }
+  function closeModalDirect(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
