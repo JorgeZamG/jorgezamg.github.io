@@ -101,6 +101,35 @@
     margin-bottom: 16px;
   }
 
+  /* Context banner — new */
+  .context-banner {
+    background: var(--text);
+    color: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .context-banner-item { flex: 1; min-width: 140px; }
+  .context-banner-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+  }
+  .context-banner-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    line-height: 1.4;
+  }
+  .context-banner-value.accent { color: #2dd4bf; }
+
   /* Tool cards */
   .tool-cards {
     display: grid;
@@ -201,6 +230,7 @@
 
   .impact-item.green { border-color: #bbf7d0; background: #f0fdf4; }
   .impact-item.purple { border-color: #d8b4fe; background: #faf5ff; }
+  .impact-item.dark { border-color: var(--text); background: var(--text); }
 
   .impact-metric {
     font-family: var(--mono);
@@ -211,7 +241,9 @@
     margin-bottom: 4px;
   }
   .impact-item.purple .impact-metric { color: var(--accent2); }
+  .impact-item.dark .impact-metric { color: #2dd4bf; }
   .impact-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .impact-item.dark .impact-desc { color: #9ca3af; }
 
   /* Stack section */
   .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
@@ -223,6 +255,7 @@
   }
   .pill.teal { background: var(--accent-light); border-color: #a7d9da; color: var(--accent); }
   .pill.purple { background: var(--accent2-light); border-color: #d8b4fe; color: var(--accent2); }
+  .pill.dark { background: var(--text); border-color: var(--text); color: #2dd4bf; }
 
   /* Divider */
   .tool-divider {
@@ -240,6 +273,40 @@
     color: var(--muted);
     white-space: nowrap;
   }
+
+  /* Ownership timeline — new */
+  .ownership-row {
+    display: flex;
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .ownership-phase {
+    flex: 1;
+    padding: 20px 16px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .ownership-phase:last-child { border-right: none; }
+  .ownership-phase.active { background: var(--accent-light); }
+  .ownership-phase-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .ownership-phase-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .ownership-phase-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .ownership-phase.active .ownership-phase-label { color: var(--accent); }
 
   /* Lessons */
   .lesson {
@@ -267,207 +334,245 @@
 
   <div class="eyebrow">AI Artifact — Case Study · Artifact 02 / 03</div>
 
-  <h1>Two AI Systems. 50+ Daily Users.<br><em>Faster Decisions Across Support and Content.</em></h1>
-  <p class="subtitle">How I designed the operational layer behind two production AI systems — a customer-service knowledge assistant and a copywriting copilot — enabling faster decisions, less manual work, and daily adoption across support and content teams.</p>
+  <h1>AI Portfolio Manager.<br><em>Two Systems. 50+ Daily Users. Decisions Returned to Their Owners.</em></h1>
+  <p class="subtitle">As AI Portfolio Manager at a Fortune 500 consumer goods company, I owned the strategy, scoping, and adoption of two production AI systems — shifting how 50+ people made daily decisions and reducing supervisor escalations by 40%.</p>
 
   <div class="meta">
     <div class="meta-item">
       <div class="meta-label">My Role</div>
-      <div class="meta-value">Process Design · Prompt Engineering · Adoption Lead</div>
+      <div class="meta-value">AI Portfolio Manager · Ops Lead · Adoption Strategy</div>
     </div>
     <div class="meta-item">
-      <div class="meta-label">Team</div>
-      <div class="meta-value">Ops & Enablement Lead (Jorge) + Engineering team</div>
+      <div class="meta-label">Scope</div>
+      <div class="meta-value">Cross-functional · Support & Content Teams</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Stack</div>
       <div class="meta-value">Claude API · GPT · Gemini · RAG · CRM integration</div>
     </div>
     <div class="meta-item">
-      <div class="meta-label">Total users</div>
-      <div class="meta-value">50+ agents + copywriting team</div>
+      <div class="meta-label">Impact</div>
+      <div class="meta-value">50+ daily users · 40% escalation reduction</div>
     </div>
   </div>
 
-  <!-- Overview -->
-  <h2>The Challenge</h2>
-  <p>Customer service agents were spending significant time searching across disconnected sources — PDFs, internal wikis, SOPs, and live CRM data — to resolve customer issues. The process was slow, inconsistent, and highly dependent on individual experience. At the same time, the content team was bottlenecked by production volume. Writers spent most of their time drafting first versions, leaving limited space for strategy, iteration, and creative direction. In both cases, the core issue was not lack of knowledge — it was how that knowledge was accessed and used in day-to-day decisions..</p>
-  <p>My role spanned process design, prompt engineering, model evaluation, and user adoption — designing the layer between AI systems and the teams using them.</p>
-
-  <div class="callout">
-    <p>"The opportunity was not just automation — it was improving the speed and quality of decisions made by the people closest to the work."</p>
+  <!-- Context banner -->
+  <div class="context-banner">
+    <div class="context-banner-item">
+      <div class="context-banner-label">Company</div>
+      <div class="context-banner-value">Fortune 500 · Consumer Goods</div>
+    </div>
+    <div class="context-banner-item">
+      <div class="context-banner-label">My ownership</div>
+      <div class="context-banner-value accent">Strategy → Scoping → Adoption → Outcomes</div>
+    </div>
+    <div class="context-banner-item">
+      <div class="context-banner-label">Teams impacted</div>
+      <div class="context-banner-value">Customer Support · Content & Copy</div>
+    </div>
+    <div class="context-banner-item">
+      <div class="context-banner-label">Duration</div>
+      <div class="context-banner-value">Multi-quarter deployment</div>
+    </div>
   </div>
 
-  <h2>Decisions Enabled</h2>
-  <p>Agents resolved customer issues without relying on supervisors for policy interpretation.</p>
-  <p>Teams reduced escalation dependency by enabling faster, more consistent judgment.</p>
-  <p>Copywriters shifted from drafting to directing — selecting and refining instead of starting from zero.</p>
-  <p>Content teams increased output without sacrificing quality or brand consistency.</p>
-  
+  <!-- The mandate -->
+  <h2>The Mandate</h2>
+  <p>The company had identified AI as a strategic priority but lacked the operational layer to turn that into shipped, adopted products. Two teams — customer support and content — were burning time on low-leverage work: agents searching across fragmented systems to answer questions they already knew, and writers spending their best hours producing first drafts instead of directing creative strategy.</p>
+  <p>My role as AI Portfolio Manager was to define what got built, sequence the work, align stakeholders, and — critically — own adoption until each system became the default way teams operated. Building the tools was never the hard part. Getting 50 people to change how they work every day was.</p>
+
+  <div class="callout">
+    <p>"The goal wasn't to automate tasks. It was to give decision-making back to the people closest to the work — and remove the friction that was slowing them down."</p>
+  </div>
+
+  <!-- Ownership map -->
+  <h2>What I Owned End-to-End</h2>
+  <p>Most AI projects fail at the handoff between "built" and "used." My role was designed to close that gap — I held accountability from the first stakeholder conversation through to daily active usage.</p>
+
+  <div class="ownership-row">
+    <div class="ownership-phase active">
+      <span class="ownership-phase-icon">🎯</span>
+      <div class="ownership-phase-label">Define</div>
+      <div class="ownership-phase-value">Problem scoping & business case</div>
+    </div>
+    <div class="ownership-phase active">
+      <span class="ownership-phase-icon">🗺️</span>
+      <div class="ownership-phase-label">Sequence</div>
+      <div class="ownership-phase-value">Roadmap & stakeholder alignment</div>
+    </div>
+    <div class="ownership-phase active">
+      <span class="ownership-phase-icon">⚙️</span>
+      <div class="ownership-phase-label">Ship</div>
+      <div class="ownership-phase-value">Ops design & delivery coordination</div>
+    </div>
+    <div class="ownership-phase active">
+      <span class="ownership-phase-icon">📈</span>
+      <div class="ownership-phase-label">Adopt</div>
+      <div class="ownership-phase-value">Rollout, feedback loops & daily usage</div>
+    </div>
+  </div>
+
   <!-- Two tools -->
   <div class="tool-cards">
     <div class="tool-card cs">
       <span class="tool-emoji">🎧</span>
-      <div class="tool-name">Customer Service Knowledge Base</div>
-      <div class="tool-desc">RAG-powered assistant giving agents instant access to the full knowledge base — PDFs, wiki, SOPs, and live CRM data — through a single conversational interface.</div>
-      <div class="tool-users">50+ daily active agents</div>
+      <div class="tool-name">Customer Service Knowledge Assistant</div>
+      <div class="tool-desc">RAG-powered system unifying all knowledge sources — PDFs, wiki, SOPs, live CRM data — into a single conversational interface. Agents stopped escalating and started deciding.</div>
+      <div class="tool-users">50+ daily active agents · 40% escalation reduction</div>
     </div>
     <div class="tool-card copy">
       <span class="tool-emoji">✍️</span>
       <div class="tool-name">AI Copilot for Content Operations</div>
-      <div class="tool-desc">Multi-model content generator producing social copy drafts at scale — writers shifted from drafting to directing, reviewing AI output instead of producing first versions.</div>
-      <div class="tool-users">Copywriting team · Daily use</div>
+      <div class="tool-desc">Multi-model content system that shifted writers from drafting to directing. First-version production moved to AI — writers focused on brief quality, creative strategy, and final judgment.</div>
+      <div class="tool-users">Content team · Daily use · Higher throughput</div>
     </div>
   </div>
 
   <!-- Tool 1 -->
   <div class="tool-divider">
     <div class="tool-divider-line"></div>
-    <div class="tool-divider-label">Tool 01 — Customer Service Chatbot</div>
+    <div class="tool-divider-label">System 01 — Customer Service Knowledge Assistant</div>
     <div class="tool-divider-line"></div>
   </div>
 
-  <h2>How the Knowledge Chatbot Worked</h2>
-  <p>The core problem was not intelligence — it was retrieval and context. 
-    
-    Agents knew what they were looking for, but fragmented systems slowed them down. The goal was to enable agents to make correct decisions in real time, without switching between tools or relying on escalation. 
-    
-    I worked with engineering to design a RAG-based system that unified all knowledge sources into a single conversational interface.</p>
+  <h2>The Ops Problem Behind the Tech Problem</h2>
+  <p>Agents weren't slow because they lacked knowledge — they were slow because that knowledge lived in five different places and required a supervisor to interpret policy edge cases. Every escalation was a tax on the team's throughput and a signal that decision authority hadn't been properly distributed.</p>
+  <p>I scoped this as an operations problem first: how do we make correct, policy-aligned decisions accessible to the person handling the customer, in real time, without requiring a supervisor? The RAG system was the answer — but the real work was defining what "unified knowledge" meant, aligning the support team on the new workflow, and iterating until escalations actually dropped.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h3>Knowledge Unification</h3>
-        <p>Ingested PDFs, internal wiki pages, SOPs, and live CRM data into a vector store. Documents were chunked, embedded, and indexed — creating a single searchable knowledge layer across all sources for the first time.</p>
+        <h3>Problem Definition & Stakeholder Buy-In</h3>
+        <p>Mapped the escalation patterns to identify root causes. Built the business case around decision latency — not automation — which got support leadership aligned on the investment before engineering was involved.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-content">
-        <h3>Conversational Query Interface</h3>
-        <p>Agents queried in natural language — "what's our return policy for damaged items over 90 days?" — instead of navigating separate systems. The chatbot retrieved relevant document chunks and synthesized a precise, sourced answer.</p>
+        <h3>Knowledge Architecture & Source Unification</h3>
+        <p>Coordinated ingestion of PDFs, internal wikis, SOPs, and live CRM data into a single vector store. The ops challenge was deciding what belonged in the system, what didn't, and how to handle conflicting policy versions.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-content">
-        <h3>Live CRM Context</h3>
-        <p>Integrated live customer data so agents could query order history, account status, and prior interactions alongside policy documents — giving full context in a single response rather than requiring tab-switching across systems.</p>
+        <h3>Workflow Integration & Agent Onboarding</h3>
+        <p>Designed the adoption rollout — not just training sessions, but rebuilding the daily workflow around the new tool so agents experienced immediate time savings from day one. Feedback loops ran weekly through launch.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-content">
-        <h3>Multi-Model Routing</h3>
-        <p>Claude API handled complex synthesis and nuanced policy questions. GPT and Gemini were evaluated and selectively used for specific query types — optimizing for response quality and cost per interaction.</p>
+        <h3>Outcome Tracking & Continuous Calibration</h3>
+        <p>Monitored escalation rates, query quality, and agent confidence post-launch. When edge cases surfaced, I coordinated prompt and knowledge base updates — keeping the system calibrated to real operational needs.</p>
       </div>
     </div>
   </div>
 
   <div class="impact-grid">
     <div class="impact-item green">
+      <span class="impact-metric">40%</span>
+      <div class="impact-desc">Reduction in supervisor escalations — agents resolved more cases independently using the system</div>
+    </div>
+    <div class="impact-item green">
       <span class="impact-metric">~50%</span>
-      <div class="impact-desc">Faster resolution time — Agents moved from multi-tab search to single-query answers</div>
+      <div class="impact-desc">Faster resolution time — single-query answers replaced multi-tab, multi-system searches</div>
     </div>
     <div class="impact-item green">
       <span class="impact-metric">50+</span>
-      <div class="impact-desc">Daily Users — Full team adoption — system became the primary knowledge interface</div>
+      <div class="impact-desc">Daily active users — full team adoption; system became the primary knowledge interface</div>
     </div>
-    <div class="impact-item green">
-      <span class="impact-metric">↓</span>
-      <div class="impact-desc">Fewer supervisor-dependent decisions — Agents resolved more cases independently without escalation</div>
-    </div>
-    <div class="impact-item green">
-      <span class="impact-metric">↑</span>
-      <div class="impact-desc">Higher throughput per shift — Less time searching → more tickets handled per agent</div>
+    <div class="impact-item dark">
+      <span class="impact-metric">↑ Throughput</span>
+      <div class="impact-desc">More tickets handled per shift without increasing headcount or supervisor ratio</div>
     </div>
   </div>
 
   <!-- Tool 2 -->
   <div class="tool-divider">
     <div class="tool-divider-line"></div>
-    <div class="tool-divider-label">Tool 02 — AI Copilot for Content Operations</div>
+    <div class="tool-divider-label">System 02 — AI Copilot for Content Operations</div>
     <div class="tool-divider-line"></div>
   </div>
 
-  <h2>How the Copywriting Assistant Worked</h2>
-  <p>The bottleneck in the content team was not ideation — it was throughput and drafting time.
-
-Writers were spending most of their effort producing first versions, limiting their ability to focus on strategy and refinement.
-
-The system was designed to shift writers from execution to supervision.</p>
+  <h2>Shifting a Team's Operating Model, Not Just Their Tools</h2>
+  <p>The content team's bottleneck wasn't creativity — it was time allocation. Writers were spending the majority of their hours producing first drafts: the lowest-leverage part of the content production cycle. Strategy, iteration, and brief quality suffered as a result.</p>
+  <p>I framed this to leadership as an operating model problem: if we could shift writers from execution to supervision, we'd unlock capacity for the work that actually required human judgment. The AI system was the mechanism — the ops design was the intervention.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num" style="background: var(--accent2);">1</div>
       <div class="step-content">
-        <h3>Brand Voice & Context Ingestion</h3>
-        <p>I designed the prompting architecture — feeding the model brand guidelines, tone documentation, past high-performing posts, and campaign briefs. This gave the AI a working understanding of the brand's voice before generating any output.</p>
+        <h3>Operating Model Design</h3>
+        <p>Mapped the existing content workflow, identified where AI could absorb volume work, and redesigned the writer's role around brief quality and creative direction — before any tool was built or selected.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num" style="background: var(--accent2);">2</div>
       <div class="step-content">
-        <h3>Multi-Format Draft Generation</h3>
-        <p>I built the prompt framework that structured how writers submitted briefs — the tool then generated multiple copy variants across formats (Instagram caption, tweet, long-form post) simultaneously. Multi-model approach allowed comparison of Claude, GPT, and Gemini outputs for tone and style.</p>
+        <h3>System Scoping & Model Evaluation</h3>
+        <p>Evaluated Claude, GPT, and Gemini across tone, brand alignment, and output consistency for the content team's specific formats. Defined the prompting architecture around brand voice, past performance data, and campaign context.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num" style="background: var(--accent2);">3</div>
       <div class="step-content">
-        <h3>Writer Supervision Layer</h3>
-        <p>Copywriters reviewed, selected, and refined AI-generated drafts rather than starting from blank pages. Their role shifted upstream — focusing on brief quality, creative direction, and final judgment rather than volume production.</p>
+        <h3>Role Transition & Change Management</h3>
+        <p>The hardest part wasn't the tool — it was helping writers redefine what good work looked like in the new model. I ran structured sessions to shift the team from "I write" to "I direct," with clear quality standards for AI output review.</p>
       </div>
     </div>
   </div>
 
   <div class="impact-grid">
     <div class="impact-item purple">
-      <span class="impact-metric">Faster</span>
-      <div class="impact-desc">Content turnaround improved significantly — more posts shipped per week without increasing team size.</div>
+      <span class="impact-metric">↑ Output</span>
+      <div class="impact-desc">Content throughput increased significantly — more posts shipped per week without growing the team</div>
     </div>
     <div class="impact-item purple">
       <span class="impact-metric">↑ Strategy</span>
-      <div class="impact-desc">Copywriters redirected freed time toward campaign strategy and creative direction instead of drafting.</div>
+      <div class="impact-desc">Writers redirected freed capacity toward campaign strategy, brief quality, and creative direction</div>
     </div>
   </div>
 
-  <!-- Lessons -->
-  <h2>Why These Systems Reached Daily Adoption</h2>
+  <!-- Why adoption worked -->
+  <h2>Why Both Systems Reached Daily Adoption</h2>
+  <p>Most AI pilots die between launch and habit. The gap isn't technical — it's operational. These systems reached daily active usage because adoption was treated as a first-class deliverable, not an afterthought.</p>
   <div class="lessons">
     <div class="lesson">
-      <div class="lesson-icon">🎯</div>
-      <div class="lesson-text"><strong>Workflow-first design</strong> Systems were built around existing team behaviors, not new processes.</div>
+      <div class="lesson-icon">🔑</div>
+      <div class="lesson-text"><strong>AI value is unlocked at the ops layer, not the model layer.</strong> The choice of Claude vs GPT vs Gemini mattered far less than how clearly we defined the workflow, the role change, and the success criteria for the teams using these systems daily.</div>
     </div>
     <div class="lesson">
-      <div class="lesson-icon">🔀</div>
-      <div class="lesson-text"><strong>Multi-model optimization.</strong> Different models used based on task type improved output quality.</div>
+      <div class="lesson-icon">🎯</div>
+      <div class="lesson-text"><strong>Adoption is a strategy problem, not a training problem.</strong> We didn't run training sessions and hope behavior changed. We rebuilt the daily workflow so the new system was the path of least resistance from day one.</div>
     </div>
     <div class="lesson">
       <div class="lesson-icon">📐</div>
-      <div class="lesson-text"><strong>Human-in-the-loop design.</strong> AI handled volume; users retained control and judgment.</div>
+      <div class="lesson-text"><strong>Human-in-the-loop design preserves trust.</strong> AI handled volume and retrieval. Humans retained judgment and escalation authority. That distinction was explicit — and it was what made teams willing to rely on the system.</div>
     </div>
     <div class="lesson">
       <div class="lesson-icon">🔁</div>
-      <div class="lesson-text"><strong>Continuous iteration with users.</strong> Feedback loops shaped prompt design, workflows, and usability post-launch.</div>
+      <div class="lesson-text"><strong>Post-launch calibration is where the real ops work happens.</strong> Both systems improved most in the 4 weeks after launch. Weekly feedback loops, prompt updates, and workflow refinements are what separated "used once" from "used every day."</div>
     </div>
   </div>
 
   <!-- Stack -->
   <h2>Stack</h2>
   <div class="stack">
+    <span class="pill dark">AI Portfolio Management</span>
+    <span class="pill dark">Adoption Strategy</span>
+    <span class="pill dark">Change Management</span>
     <span class="pill teal">Claude API</span>
     <span class="pill teal">GPT API</span>
     <span class="pill teal">Gemini</span>
     <span class="pill teal">RAG pipeline</span>
-    <span class="pill teal">Vector database</span>
     <span class="pill teal">CRM integration</span>
-    <span class="pill purple">PDF ingestion</span>
-    <span class="pill purple">Wiki / knowledge base</span>
-    <span class="pill purple">Brand voice prompting</span>
+    <span class="pill purple">Stakeholder alignment</span>
+    <span class="pill purple">Operating model design</span>
+    <span class="pill purple">Cross-functional delivery</span>
     <span class="pill">Prompt engineering</span>
-    <span class="pill">User feedback loops</span>
+    <span class="pill">Feedback loops</span>
   </div>
 
   <div class="footer">
