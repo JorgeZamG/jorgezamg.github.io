@@ -267,8 +267,8 @@
 
   <div class="eyebrow">AI Artifact — Case Study · Artifact 02 / 03</div>
 
-  <h1>Two AI Tools. 50+ Users.<br><em>Both Adopted Daily.</em></h1>
-  <p class="subtitle">How I led the ops, enablement, and adoption of two production AI tools inside a retail company — a customer service knowledge chatbot and a copywriting assistant — that shifted how agents and writers actually worked, every day.</p>
+  <h1>Two AI Systems. 50+ Daily Users.<br><em>Faster Decisions Across Support and Content.</em></h1>
+  <p class="subtitle">How I designed the operational layer behind two production AI systems — a customer-service knowledge assistant and a copywriting copilot — enabling faster decisions, less manual work, and daily adoption across support and content teams.</p>
 
   <div class="meta">
     <div class="meta-item">
@@ -291,24 +291,30 @@
 
   <!-- Overview -->
   <h2>The Challenge</h2>
-  <p>Customer service agents at a retail company were spending significant time searching across disconnected sources — PDFs, internal wikis, SOPs, and live CRM data — to resolve customer issues. The search was slow, inconsistent, and dependent on individual agent knowledge. Meanwhile the content team was bottlenecked producing social copy, with writers spending most of their time drafting first versions rather than thinking strategically.</p>
-  <p>My role spanned process design, prompt engineering, model evaluation, user adoption, and outcome tracking — the full non-engineering layer of both tools. The opportunity was clear: both teams had the domain knowledge to supervise AI outputs. Neither needed AI to replace their judgment — they needed AI to eliminate the low-value work upstream of it.</p>
+  <p>Customer service agents were spending significant time searching across disconnected sources — PDFs, internal wikis, SOPs, and live CRM data — to resolve customer issues. The process was slow, inconsistent, and highly dependent on individual experience. At the same time, the content team was bottlenecked by production volume. Writers spent most of their time drafting first versions, leaving limited space for strategy, iteration, and creative direction. In both cases, the core issue was not lack of knowledge — it was how that knowledge was accessed and used in day-to-day decisions..</p>
+  <p>My role spanned process design, prompt engineering, model evaluation, and user adoption — designing the layer between AI systems and the teams using them.</p>
 
   <div class="callout">
-    <p>"My job was to design the layer between the AI and the people using it — making sure the tool fit the workflow, the prompts produced reliable output, and adoption actually happened."</p>
+    <p>"The opportunity was not just automation — it was improving the speed and quality of decisions made by the people closest to the work."</p>
   </div>
 
+  <h2>Decisions Enabled</h2>
+  <p>Agents resolved customer issues without relying on supervisors for policy interpretation.</p>
+  <p>Teams reduced escalation dependency by enabling faster, more consistent judgment.</p>
+  <p>Copywriters shifted from drafting to directing — selecting and refining instead of starting from zero.</p>
+  <p>Content teams increased output without sacrificing quality or brand consistency.</p>
+  
   <!-- Two tools -->
   <div class="tool-cards">
     <div class="tool-card cs">
       <span class="tool-emoji">🎧</span>
-      <div class="tool-name">Agent Knowledge Chatbot</div>
+      <div class="tool-name">Customer Service Knowledge Base</div>
       <div class="tool-desc">RAG-powered assistant giving agents instant access to the full knowledge base — PDFs, wiki, SOPs, and live CRM data — through a single conversational interface.</div>
       <div class="tool-users">50+ daily active agents</div>
     </div>
     <div class="tool-card copy">
       <span class="tool-emoji">✍️</span>
-      <div class="tool-name">Copywriting AI Assistant</div>
+      <div class="tool-name">AI Copilot for Content Operations</div>
       <div class="tool-desc">Multi-model content generator producing social copy drafts at scale — writers shifted from drafting to directing, reviewing AI output instead of producing first versions.</div>
       <div class="tool-users">Copywriting team · Daily use</div>
     </div>
@@ -322,7 +328,11 @@
   </div>
 
   <h2>How the Knowledge Chatbot Worked</h2>
-  <p>The core problem was retrieval, not intelligence. Agents knew what they were looking for — they just couldn't find it fast enough across fragmented sources. I worked with the engineering team to design and deploy a RAG (Retrieval-Augmented Generation) pipeline that unified all knowledge sources into a single queryable layer, with Claude API handling synthesis and response generation.</p>
+  <p>The core problem was not intelligence — it was retrieval and context. 
+    
+    Agents knew what they were looking for, but fragmented systems slowed them down. The goal was to enable agents to make correct decisions in real time, without switching between tools or relying on escalation. 
+    
+    I worked with engineering to design a RAG-based system that unified all knowledge sources into a single conversational interface.</p>
 
   <div class="steps">
     <div class="step">
@@ -358,31 +368,35 @@
   <div class="impact-grid">
     <div class="impact-item green">
       <span class="impact-metric">~50%</span>
-      <div class="impact-desc">Faster resolution time — agents stopped context-switching across systems and got precise answers in seconds instead of minutes.</div>
+      <div class="impact-desc">Faster resolution time — Agents moved from multi-tab search to single-query answers</div>
     </div>
     <div class="impact-item green">
       <span class="impact-metric">50+</span>
-      <div class="impact-desc">Agents using the tool daily as their primary knowledge source — full team adoption, not a pilot.</div>
+      <div class="impact-desc">Daily Users — Full team adoption — system became the primary knowledge interface</div>
     </div>
     <div class="impact-item green">
       <span class="impact-metric">↓</span>
-      <div class="impact-desc">Reduced escalations — agents resolved more issues independently, without needing to escalate to supervisors for policy lookups.</div>
+      <div class="impact-desc">Fewer supervisor-dependent decisions — Agents resolved more cases independently without escalation</div>
     </div>
     <div class="impact-item green">
       <span class="impact-metric">↑</span>
-      <div class="impact-desc">Higher agent satisfaction and more tickets handled — less time searching meant more capacity per agent per shift.</div>
+      <div class="impact-desc">Higher throughput per shift — Less time searching → more tickets handled per agent</div>
     </div>
   </div>
 
   <!-- Tool 2 -->
   <div class="tool-divider">
     <div class="tool-divider-line"></div>
-    <div class="tool-divider-label">Tool 02 — Copywriting AI Assistant</div>
+    <div class="tool-divider-label">Tool 02 — AI Copilot for Content Operations</div>
     <div class="tool-divider-line"></div>
   </div>
 
   <h2>How the Copywriting Assistant Worked</h2>
-  <p>The content team's bottleneck wasn't ideas — it was drafting volume. Writers were spending the majority of their time producing first-version social copy, leaving little bandwidth for strategy, creative direction, or quality refinement. The shift we aimed for: writers as editors and directors, not drafters.</p>
+  <p>The bottleneck in the content team was not ideation — it was throughput and drafting time.
+
+Writers were spending most of their effort producing first versions, limiting their ability to focus on strategy and refinement.
+
+The system was designed to shift writers from execution to supervision.</p>
 
   <div class="steps">
     <div class="step">
@@ -411,32 +425,32 @@
   <div class="impact-grid">
     <div class="impact-item purple">
       <span class="impact-metric">Faster</span>
-      <div class="impact-desc">Content turnaround improved significantly — more posts shipped per week with the same team headcount.</div>
+      <div class="impact-desc">Content turnaround improved significantly — more posts shipped per week without increasing team size.</div>
     </div>
     <div class="impact-item purple">
       <span class="impact-metric">↑ Strategy</span>
-      <div class="impact-desc">Copywriters redirected freed time toward campaign strategy and creative direction — higher-value work that AI couldn't do.</div>
+      <div class="impact-desc">Copywriters redirected freed time toward campaign strategy and creative direction instead of drafting.</div>
     </div>
   </div>
 
   <!-- Lessons -->
-  <h2>What Made Both Tools Work</h2>
+  <h2>Why These Systems Reached Daily Adoption</h2>
   <div class="lessons">
     <div class="lesson">
       <div class="lesson-icon">🎯</div>
-      <div class="lesson-text"><strong>Adoption depends on fitting the existing workflow.</strong> I mapped both teams' workflows before a single prompt was written — designing the tools to slot into how agents and writers already worked, not asking them to change. That's why both hit daily active usage.</div>
+      <div class="lesson-text"><strong>Workflow-first design</strong> Systems were built around existing team behaviors, not new processes.</div>
     </div>
     <div class="lesson">
       <div class="lesson-icon">🔀</div>
-      <div class="lesson-text"><strong>Multi-model isn't just about cost — it's about fit.</strong> Claude, GPT, and Gemini each had different strengths. Routing by query type rather than defaulting to one model improved output quality meaningfully.</div>
+      <div class="lesson-text"><strong>Multi-model optimization.</strong> Different models used based on task type improved output quality.</div>
     </div>
     <div class="lesson">
       <div class="lesson-icon">📐</div>
-      <div class="lesson-text"><strong>The human role matters more when AI handles volume.</strong> Shifting agents and writers from execution to supervision only worked because they had genuine domain expertise. AI amplified their judgment — it didn't replace it.</div>
+      <div class="lesson-text"><strong>Human-in-the-loop design.</strong> AI handled volume; users retained control and judgment.</div>
     </div>
     <div class="lesson">
       <div class="lesson-icon">🔁</div>
-      <div class="lesson-text"><strong>Iteration with real users is the only way to tune.</strong> I ran structured feedback loops with both teams after launch — tracking usage patterns, surfacing friction points, and feeding changes back into prompt design and workflow adjustments. Final versions looked very different from first deploys.</div>
+      <div class="lesson-text"><strong>Continuous iteration with users.</strong> Feedback loops shaped prompt design, workflows, and usability post-launch.</div>
     </div>
   </div>
 
@@ -447,12 +461,11 @@
     <span class="pill teal">GPT API</span>
     <span class="pill teal">Gemini</span>
     <span class="pill teal">RAG pipeline</span>
-    <span class="pill teal">Vector store</span>
+    <span class="pill teal">Vector database</span>
     <span class="pill teal">CRM integration</span>
     <span class="pill purple">PDF ingestion</span>
     <span class="pill purple">Wiki / knowledge base</span>
     <span class="pill purple">Brand voice prompting</span>
-    <span class="pill purple">Multi-model routing</span>
     <span class="pill">Prompt engineering</span>
     <span class="pill">User feedback loops</span>
   </div>
