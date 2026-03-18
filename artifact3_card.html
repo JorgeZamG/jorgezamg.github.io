@@ -1,549 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Artifact Card — AI Decision Framework</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #ffffff;
-    --text: #0f172a;
-    --muted: #64748b;
-    --accent: #6366f1;
-    --accent2: #f43f5e;
-    --accent3: #10b981;
-    --border: #e2e8f0;
-    --light: #f8fafc;
-    --sans: 'Space Grotesk', sans-serif;
-    --mono: 'Space Mono', monospace;
-  }
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>AI Artifact Card — AI Decision Framework</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+          :root {
+                  --bg: #ffffff;
+                  --text: #0f172a;
+                  --muted: #64748b;
+                  --accent: #6366f1;
+                  --accent2: #f43f5e;
+                  --accent3: #10b981;
+                  --border: #e2e8f0;
+                  --light: #f8fafc;
+                  --sans: 'Space Grotesk', sans-serif;
+                  --mono: 'Space Mono', monospace;
+          }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: #f1f5f9;
-    font-family: var(--sans);
-    padding: 40px 24px;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
+          body {
+                  background: #f1f5f9;
+                  font-family: var(--sans);
+                  padding: 40px 24px;
+                  min-height: 100vh;
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: center;
+          }
 
-  .card {
-    background: var(--bg);
-    width: 100%;
-    max-width: 840px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 20px 60px -10px rgba(0,0,0,0.12);
-  }
+          .card {
+                  background: var(--bg);
+                  width: 100%;
+                  max-width: 840px;
+                  border-radius: 16px;
+                  overflow: hidden;
+                  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 20px 60px -10px rgba(0,0,0,0.12);
+          }
 
-  /* Top bar */
-  .top-bar {
-    background: var(--text);
-    padding: 20px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+          /* Top bar */
+          .top-bar {
+                  background: var(--text);
+                  padding: 20px 32px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+          }
+          .top-bar-left {
+                  display: flex;
+                  align-items: center;
+                  gap: 16px;
+          }
+          .artifact-badge {
+                  background: var(--accent);
+                  color: white;
+                  font-family: var(--mono);
+                  font-size: 9px;
+                  padding: 4px 10px;
+                  border-radius: 4px;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+          }
+          .top-bar-title {
+                  font-size: 13px;
+                  font-weight: 500;
+                  color: #94a3b8;
+          }
+          .top-bar-right {
+                  font-family: var(--mono);
+                  font-size: 9px;
+                  color: #475569;
+                  text-align: right;
+                  line-height: 1.8;
+          }
 
-  .top-bar-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+          /* Hero */
+          .hero {
+                  padding: 40px 32px 32px;
+                  border-bottom: 1px solid var(--border);
+                  display: grid;
+                  grid-template-columns: 1fr auto;
+                  gap: 32px;
+                  align-items: start;
+          }
+          .hero-tag {
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--accent);
+                  text-transform: uppercase;
+                  letter-spacing: 2px;
+                  margin-bottom: 12px;
+          }
+          .hero-title {
+                  font-size: 32px;
+                  font-weight: 700;
+                  line-height: 1.15;
+                  color: var(--text);
+                  margin-bottom: 12px;
+          }
+          .hero-desc {
+                  font-size: 14px;
+                  color: var(--muted);
+                  line-height: 1.7;
+                  max-width: 520px;
+          }
+          .hero-stats {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 12px;
+                  min-width: 160px;
+          }
+          .stat-box {
+                  background: var(--light);
+                  border: 1px solid var(--border);
+                  border-radius: 10px;
+                  padding: 14px 16px;
+                  text-align: center;
+          }
+          .stat-num {
+                  font-family: var(--mono);
+                  font-size: 22px;
+                  font-weight: 700;
+                  color: var(--accent);
+                  display: block;
+                  margin-bottom: 2px;
+          }
+          .stat-label {
+                  font-size: 10px;
+                  color: var(--muted);
+                  line-height: 1.3;
+          }
 
-  .artifact-badge {
-    background: var(--accent);
-    color: white;
-    font-family: var(--mono);
-    font-size: 9px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+          /* Main grid */
+          .main {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 0;
+          }
+          .main-left {
+                  padding: 32px;
+                  border-right: 1px solid var(--border);
+          }
+          .main-right {
+                  padding: 32px;
+          }
 
-  .top-bar-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: #94a3b8;
-  }
+          .section-label {
+                  font-family: var(--mono);
+                  font-size: 9px;
+                  text-transform: uppercase;
+                  letter-spacing: 2px;
+                  color: var(--muted);
+                  margin-bottom: 16px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+          }
+          .section-label::after {
+                  content: '';
+                  flex: 1;
+                  height: 1px;
+                  background: var(--border);
+          }
 
-  .top-bar-right {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: #475569;
-    text-align: right;
-    line-height: 1.8;
-  }
+          /* Framework steps */
+          .framework {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 12px;
+                  margin-bottom: 32px;
+          }
+          .fw-step {
+                  display: flex;
+                  gap: 12px;
+                  align-items: flex-start;
+          }
+          .fw-dot {
+                  width: 28px;
+                  height: 28px;
+                  border-radius: 6px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  font-weight: 700;
+                  flex-shrink: 0;
+                  color: white;
+                  margin-top: 1px;
+          }
+          .fw-dot.a { background: var(--accent); }
+          .fw-dot.b { background: #8b5cf6; }
+          .fw-dot.c { background: var(--accent2); }
+          .fw-dot.d { background: var(--accent3); }
+          .fw-body h3 {
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 3px;
+          }
+          .fw-body p {
+                  font-size: 12px;
+                  color: var(--muted);
+                  line-height: 1.5;
+          }
 
-  /* Hero */
-  .hero {
-    padding: 40px 32px 32px;
-    border-bottom: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 32px;
-    align-items: start;
-  }
+          /* Criteria table */
+          .criteria {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 8px;
+                  margin-bottom: 28px;
+          }
+          .criterion {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 10px 12px;
+                  background: var(--light);
+                  border-radius: 6px;
+                  border: 1px solid var(--border);
+          }
+          .crit-name {
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: var(--text);
+          }
+          .crit-bar {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+          }
+          .bar {
+                  width: 80px;
+                  height: 4px;
+                  background: var(--border);
+                  border-radius: 2px;
+                  overflow: hidden;
+          }
+          .bar-fill {
+                  height: 100%;
+                  border-radius: 2px;
+                  background: var(--accent);
+          }
+          .crit-label {
+                  font-family: var(--mono);
+                  font-size: 9px;
+                  color: var(--muted);
+                  width: 40px;
+                  text-align: right;
+          }
 
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-  }
+          /* Outcomes */
+          .outcomes {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                  margin-bottom: 28px;
+          }
+          .outcome {
+                  display: flex;
+                  gap: 10px;
+                  align-items: flex-start;
+                  padding: 12px;
+                  border-radius: 8px;
+                  border: 1px solid var(--border);
+          }
+          .outcome.green { border-color: #bbf7d0; background: #f0fdf4; }
+          .outcome.blue  { border-color: #bfdbfe; background: #eff6ff; }
+          .outcome.amber { border-color: #fde68a; background: #fffbeb; }
+          .outcome-icon {
+                  font-size: 16px;
+                  flex-shrink: 0;
+          }
+          .outcome-text {
+                  font-size: 12px;
+                  color: var(--text);
+                  line-height: 1.5;
+          }
+          .outcome-text strong {
+                  font-weight: 600;
+                  display: block;
+                  margin-bottom: 2px;
+          }
 
-  .hero-title {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
+          /* Stack pills */
+          .stack {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 6px;
+          }
+          .pill {
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  padding: 4px 10px;
+                  border-radius: 20px;
+                  border: 1px solid var(--border);
+                  color: var(--muted);
+                  background: var(--light);
+          }
+          .pill.active {
+                  background: #eef2ff;
+                  border-color: #c7d2fe;
+                  color: var(--accent);
+          }
 
-  .hero-desc {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 520px;
-  }
+          /* Bottom strip */
+          .bottom-strip {
+                  background: var(--light);
+                  border-top: 1px solid var(--border);
+                  padding: 16px 32px;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 6px;
+          }
+          .bottom-strip-top {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+          }
+          .bottom-name {
+                  font-size: 12px;
+                  font-weight: 600;
+                  color: var(--text);
+          }
+          .bottom-contact {
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+          }
+          .bottom-num {
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--accent);
+          }
+        </style>
+  </head>
+  <body>
+      <div class="card">
 
-  .hero-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-width: 160px;
-  }
+            <div class="top-bar">
+                    <div class="top-bar-left">
+                              <div class="artifact-badge">Artifact 03 / 03</div>div>
+                              <div class="top-bar-title">AI Decision Framework · Portfolio Case</div>div>
+                    </div>div>
+                    <div class="top-bar-right">
+                              Jorge Zamora<br>
+                              jorgeandres.zamorag@gmail.com
+                    </div>div>
+            </div>div>
 
-  .stat-box {
-    background: var(--light);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    text-align: center;
-  }
+            <div class="hero">
+                    <div>
+                              <div class="hero-tag">AI Decision Framework · Applied in real-world teams</div>
+                              <div class="hero-title">Qualifying AI Projects<br>Before They Get Built</div>
+                              <div class="hero-desc">I worked with cross-functional teams across engineering, business, and operations to design a framework for evaluating which AI workflows were worth building — considering technical feasibility, business impact, and team readiness before committing engineering resources. The goal was to move from ideas to clear, actionable decisions on where AI could actually improve how teams operate.</div>
+                    </div>
+                    <div class="hero-stats">
+                              <div class="stat-box">
+                                          <span class="stat-num">Faster</span>span>
+                                          <div class="stat-label">Decision cycles for AI initiatives</div>
+                              </div>
+                              <div class="stat-box">
+                                          <span class="stat-num">Go / No-Go</span>span>
+                                          <div class="stat-label">Structured evaluation before build</div>
+                              </div>
+                              <div class="stat-box">
+                                          <span class="stat-num">Cross-team</span>span>
+                                          <div class="stat-label">Alignment across business and engineering</div>
+                              </div>
+                    </div>
+            </div>
 
-  .stat-num {
-    font-family: var(--mono);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 2px;
-  }
+            <div class="main">
+                    <div class="main-left">
 
-  .stat-label {
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.3;
-  }
-
-  /* Main grid */
-  .main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-
-  .main-left {
-    padding: 32px;
-    border-right: 1px solid var(--border);
-  }
-
-  .main-right {
-    padding: 32px;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--muted);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* Framework steps */
-  .framework {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-
-  .fw-step {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .fw-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 700;
-    flex-shrink: 0;
-    color: white;
-    margin-top: 1px;
-  }
-
-  .fw-dot.a { background: var(--accent); }
-  .fw-dot.b { background: #8b5cf6; }
-  .fw-dot.c { background: var(--accent2); }
-  .fw-dot.d { background: var(--accent3); }
-
-  .fw-body h3 {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
-
-  .fw-body p {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  /* Criteria table */
-  .criteria {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .criterion {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 12px;
-    background: var(--light);
-    border-radius: 6px;
-    border: 1px solid var(--border);
-  }
-
-  .crit-name {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .crit-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .bar {
-    width: 80px;
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: var(--accent);
-  }
-
-  .crit-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--muted);
-    width: 40px;
-    text-align: right;
-  }
-
-  /* Outcomes */
-  .outcomes {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .outcome {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-
-  .outcome.green { border-color: #bbf7d0; background: #f0fdf4; }
-  .outcome.blue { border-color: #bfdbfe; background: #eff6ff; }
-  .outcome.amber { border-color: #fde68a; background: #fffbeb; }
-
-  .outcome-icon { font-size: 16px; flex-shrink: 0; }
-
-  .outcome-text {
-    font-size: 12px;
-    color: var(--text);
-    line-height: 1.5;
-  }
-
-  .outcome-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
-
-  /* Stack pills */
-  .stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .pill {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: var(--light);
-  }
-
-  .pill.active {
-    background: #eef2ff;
-    border-color: #c7d2fe;
-    color: var(--accent);
-  }
-
-  /* Bottom strip */
-  .bottom-strip {
-    background: var(--light);
-    border-top: 1px solid var(--border);
-    padding: 16px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .bottom-name {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .bottom-contact {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-  }
-
-  .bottom-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-  }
-</style>
-</head>
-<body>
-<div class="card">
-
-  <div class="top-bar">
-    <div class="top-bar-left">
-      <div class="artifact-badge">Artifact 03 / 03</div>
-      <div class="top-bar-title">AI Decision Framework · Portfolio Case</div>
-    </div>
-    <div class="top-bar-right">
-      Jorge Zamora<br>
-      jorgeandres.zamorag@gmail.com
-    </div>
-  </div>
-
-  <div class="hero">
-    <div>
-      <div class="hero-tag">AI Decision Framework · Applied in real-world teams</div>
-      <div class="hero-title">Qualifying AI Projects<br>Before They Get Built</div>
-      <div class="hero-desc">I worked with cross-functional teams across engineering, business, and operations to design a framework for evaluating which AI workflows were worth building — considering technical feasibility, business impact, and team readiness before committing engineering resources. The goal was to move from ideas to clear, actionable decisions on where AI could actually improve how teams operate.</div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-box">
-        <span class="stat-num">Faster</span>
-        <div class="stat-label">Decision cycles for AI initiatives</div>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">Go / No-Go</span>
-        <div class="stat-label">Structured evaluation before build</div>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">Cross-team</span>
-        <div class="stat-label">Alignment across business and engineering</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="main">
-    <div class="main-left">
-      <div class="section-label">Evaluation Framework</div>
-      <div class="framework">
-        <div class="fw-step">
-          <div class="fw-dot a">01</div>
-          <div class="fw-body">
-            <h3>Technical Viability Assessment</h3>
-            <p>Worked with engineering to map data availability, integration complexity, and model requirements. Flagged blockers early to prevent downstream waste.</p>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-dot b">02</div>
-          <div class="fw-body">
-            <h3>Business Value Modeling</h3>
-            <p>Built ROI estimates for each proposed AI workflow — time saved, error reduction, headcount impact. Translated technical specs into financial language for stakeholder sign-off.</p>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-dot c">03</div>
-          <div class="fw-body">
-            <h3>Operational Readiness Scoring</h3>
-            <p>Assessed whether the receiving team had the process maturity to absorb an AI workflow — data quality, change management readiness, ownership clarity.</p>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-dot d">04</div>
-          <div class="fw-body">
-            <h3>Deployment Roadmap Output</h3>
-            <p>Delivered Go/No-Go recommendations with prioritized deployment roadmaps, documented decision logic, and clear next steps for implementation.</p>
-        </div>
-      </div>
-
-      <div class="section-label">Decisions Enabled</div>
-<div class="outcomes" style="margin-bottom: 32px;">
-  <div class="outcome blue">
-    <div class="outcome-icon">→</div>
-    <div class="outcome-text">
-      <strong>What to build vs. what to skip</strong>
-      Helped teams focus on AI workflows with real potential impact.
-    </div>
-  </div>
-  <div class="outcome amber">
-    <div class="outcome-icon">→</div>
-    <div class="outcome-text">
-      <strong>Where teams were not ready yet</strong>
-      Identified gaps in processes or data before pushing implementation.
-    </div>
-  </div>
-  <div class="outcome green">
-    <div class="outcome-icon">→</div>
-    <div class="outcome-text">
-      <strong>How to prioritize initiatives</strong>
-      Structured decisions based on impact, effort, and readiness.
-    </div>
-  </div>
-</div>
+                              <div class="section-label">Evaluation Framework</div>
+                              <div class="framework">
+                                          <div class="fw-step">
+                                                        <div class="fw-dot a">01</div>
+                                                        <div class="fw-body">
+                                                                        <h3>Technical Viability Assessment</h3>
+                                                                      <p>Worked with engineering to map data availability, integration complexity, and model requirements. Flagged blockers early to prevent downstream waste.</p>
+                                                        </div>
+                                          </div>
+                                        <div class="fw-step">
+                                                    <div class="fw-dot b">02</div>
+                                                    <div class="fw-body">
+                                                                  <h3>Business Value Modeling</h3>
+                                                                  <p>Built ROI estimates for each proposed AI workflow — time saved, error reduction, headcount impact. Translated technical specs into financial language for stakeholder sign-off.</p>
+                                                    </div>
+                                        </div>
+                                        <div class="fw-step">
+                                                    <div class="fw-dot c">03</div>
+                                                    <div class="fw-body">
+                                                                  <h3>Operational Readiness Scoring</h3>
+                                                                  <p>Assessed whether the receiving team had the process maturity to absorb an AI workflow — data quality, change management readiness, ownership clarity.</p>
+                                                    </div>
+                                        </div>
+                                        <div class="fw-step">
+                                                    <div class="fw-dot d">04</div>
+                                                    <div class="fw-body">
+                                                                  <h3>Deployment Roadmap Output</h3>
+                                                                  <p>Delivered Go/No-Go recommendations with prioritized deployment roadmaps, documented decision logic, and clear next steps for implementation.</p>
+                                                    </div>
+                                        </div>
+                              </div>
+                    
+                            <div class="section-label">Decisions Enabled</div>
+                            <div class="outcomes" style="margin-bottom: 32px;">
+                                      <div class="outcome blue">
+                                                  <div class="outcome-icon">→</div>
+                                                  <div class="outcome-text">
+                                                                <strong>What to build vs. what to skip</strong>
+                                                                Helped teams focus on AI workflows with real potential impact.
+                                                  </div>
+                                      </div>
+                                      <div class="outcome amber">
+                                                  <div class="outcome-icon">→</div>
+                                                  <div class="outcome-text">
+                                                                <strong>Where teams were not ready yet</strong>
+                                                                Identified gaps in processes or data before pushing implementation.
+                                                  </div>
+                                      </div>
+                                      <div class="outcome green">
+                                                  <div class="outcome-icon">→</div>
+                                                  <div class="outcome-text">
+                                                                <strong>How to prioritize initiatives</strong>
+                                                                Structured decisions based on impact, effort, and readiness.
+                                                  </div>
+                                      </div>
+                            </div>
+                    
+                            <div class="section-label">Go / No-Go Decision Inputs</div>
+                            <div class="criteria">
+                                      <div class="criterion">
+                                                  <div class="crit-name">Business value (ROI)</div>
+                                                  <div class="crit-bar">
+                                                                <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
+                                                                <div class="crit-label">High</div>
+                                                  </div>
+                                      </div>
+                                      <div class="criterion">
+                                                  <div class="crit-name">Technical feasibility</div>
+                                                  <div class="crit-bar">
+                                                                <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+                                                                <div class="crit-label">Med-Hi</div>
+                                                  </div>
+                                      </div>
+                                      <div class="criterion">
+                                                  <div class="crit-name">Team readiness</div>
+                                                  <div class="crit-bar">
+                                                                <div class="bar"><div class="bar-fill" style="width:65%"></div></div>
+                                                                <div class="crit-label">Med</div>
+                                                  </div>
+                                      </div>
+                                      <div class="criterion">
+                                                  <div class="crit-name">Time to value</div>
+                                                  <div class="crit-bar">
+                                                                <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
+                                                                <div class="crit-label">High</div>
+                                                  </div>
+                                      </div>
+                            </div>
+                    
+                    </div>
+                  <div class="main-right">
+                  
+                          <div class="section-label">Key Outcomes</div>
+                          <div class="outcomes">
+                                    <div class="outcome green">
+                                                <div class="outcome-icon">📈</div>
+                                                <div class="outcome-text">
+                                                              <strong>Faster prioritization of AI initiatives</strong>
+                                                              Teams were able to move from ideas to clear decisions more quickly.
+                                                </div>
+                                    </div>
+                                    <div class="outcome blue">
+                                                <div class="outcome-icon">🔁</div>
+                                                <div class="outcome-text">
+                                                              <strong>Better alignment across teams</strong>
+                                                              Engineering and business stakeholders shared a common evaluation framework.
+                                                </div>
+                                    </div>
+                                    <div class="outcome amber">
+                                                <div class="outcome-icon">🧭</div>
+                                                <div class="outcome-text">
+                                                              <strong>Reduced unnecessary builds</strong>
+                                                              Avoided investing in workflows that lacked readiness or clear impact.
+                                                </div>
+                                    </div>
+                          </div>
+                  
+                          <div class="section-label">Why This Matters</div>
+                          <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 8px; padding: 16px; margin-bottom: 28px;">
+                                    <p style="font-size: 13px; color: #581c87; line-height: 1.7;">
+                                      One of the biggest challenges in AI adoption is not building models — it's deciding what is actually worth building. This framework helped teams focus on high-impact use cases and avoid spending time on ideas that wouldn't improve how they operate.
+                                    </p>
+                          </div>
+                  
+                          <div class="section-label">Stack Used</div>
+                          <div class="stack">
+                                    <span class="pill active">Jira</span>
+                                    <span class="pill active">Confluence</span>
+                                    <span class="pill active">Power BI</span>
+                                    <span class="pill active">Databricks</span>
+                                    <span class="pill active">SQL</span>
+                                    <span class="pill">Agile / Scrum</span>
+                                    <span class="pill">Stakeholder workshops</span>
+                                    <span class="pill">ROI modeling</span>
+                                    <span class="pill">Roadmap design</span>
+                          </div>
+                  
+                  </div>
+            </div>
       
-      <div class="section-label">Go / No-Go Decision Inputs</div>
-      <div class="criteria">
-        <div class="criterion">
-          <div class="crit-name">Business value (ROI)</div>
-          <div class="crit-bar">
-            <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
-            <div class="crit-label">High</div>
+          <div class="bottom-strip">
+                <div class="bottom-strip-top">
+                        <div class="bottom-name">Jorge Zamora</div>
+                        <div class="bottom-num">Artifact 03 / 03 — AI Decision Framework</div>
+                </div>
+                <div class="bottom-contact">jorgeandres.zamorag@gmail.com · linkedin.com/in/jorge-andres-zamora/</div>
           </div>
-        </div>
-        <div class="criterion">
-          <div class="crit-name">Technical feasibility</div>
-          <div class="crit-bar">
-            <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
-            <div class="crit-label">Med-Hi</div>
-          </div>
-        </div>
-        <div class="criterion">
-          <div class="crit-name">Team readiness</div>
-          <div class="crit-bar">
-            <div class="bar"><div class="bar-fill" style="width:65%"></div></div>
-            <div class="crit-label">Med</div>
-          </div>
-        </div>
-        <div class="criterion">
-          <div class="crit-name">Time to value</div>
-          <div class="crit-bar">
-            <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
-            <div class="crit-label">High</div>
-          </div>
-        </div>
+      
       </div>
-    </div>
-
-    <div class="main-right">
-     <div class="section-label">Key Outcomes</div>
-<div class="outcomes">
-  <div class="outcome green">
-    <div class="outcome-icon">📈</div>
-    <div class="outcome-text">
-      <strong>Faster prioritization of AI initiatives</strong>
-      Teams were able to move from ideas to clear decisions more quickly.
-    </div>
-  </div>
-  <div class="outcome blue">
-    <div class="outcome-icon">🔁</div>
-    <div class="outcome-text">
-      <strong>Better alignment across teams</strong>
-      Engineering and business stakeholders shared a common evaluation framework.
-    </div>
-  </div>
-  <div class="outcome amber">
-    <div class="outcome-icon">🧭</div>
-    <div class="outcome-text">
-      <strong>Reduced unnecessary builds</strong>
-      Avoided investing in workflows that lacked readiness or clear impact.
-    </div>
-  </div>
-</div>
-
-      <div class="section-label">Why This Matters</div>
-        <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 8px; padding: 16px; margin-bottom: 28px;">
-          <p style="font-size: 13px; color: #581c87; line-height: 1.7;">
-            One of the biggest challenges in AI adoption is not building models — it’s deciding what is actually worth building. This framework helped teams focus on high-impact use cases and avoid spending time on ideas that wouldn’t improve how they operate.
-          </p>
-      </div>
-
-      <div class="section-label">Stack Used</div>
-      <div class="stack">
-        <span class="pill active">Jira</span>
-        <span class="pill active">Confluence</span>
-        <span class="pill active">Power BI</span>
-        <span class="pill active">Databricks</span>
-        <span class="pill active">SQL</span>
-        <span class="pill">Agile / Scrum</span>
-        <span class="pill">Stakeholder workshops</span>
-        <span class="pill">ROI modeling</span>
-        <span class="pill">Roadmap design</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="bottom-strip">
-    <div>
-      <div class="bottom-name">Jorge Zamora</div>
-      <div class="bottom-contact">jorgeandres.zamorag@gmail.com · linkedin.com/in/jorge-andres-zamora/</div>
-    </div>
-    <div class="bottom-num">Artifact 03 / 03 — AI Decision Framework</div>
-  </div>
-
-</div>
-</body>
+  </body>
 </html>
