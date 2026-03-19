@@ -373,7 +373,7 @@
 
   .artifacts-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 24px;
   }
 
@@ -1347,6 +1347,19 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="modal4" onclick="closeModal(event, 'modal4')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Artifact 04 — Crypto Market Decision Engine</div>
+      <button class="modal-close" onclick="closeModalDirect('modal4')">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe src="artifact1_flow.html" title="Artifact 4"></iframe>
+    </div>
+  </div>
+</div>
+
+  
 <script>
   // Modal
   function openModal(id) {
